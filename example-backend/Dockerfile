@@ -1,0 +1,15 @@
+FROM golang:1.16-alpine
+
+EXPOSE 8080
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN apk add build-base
+
+RUN go build
+
+RUN go test ./...
+
+CMD ["./server"]
