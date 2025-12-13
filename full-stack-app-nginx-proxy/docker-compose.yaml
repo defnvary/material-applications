@@ -1,18 +1,11 @@
 services:
   frontend:
-    image: example-frontend:latest
-    ports:
-      - 5000:5000
+    image: example-frontend:v2
   backend:
-    image: example-backend:latest
-    ports:
-      - 8080:8080
+    image: example-backend:v2
     environment:
       - REDIS_HOST=redis-cache
       - POSTGRES_HOST=postgres-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DATABASE=postgres
     depends_on:
       - postgres-db
   redis-cache:
@@ -26,7 +19,7 @@ services:
     volumes:
       - ./database:/var/lib/postgresql
   nginx-reverse-proxy:
-    image: nginx:latest
+    image: nginx:alpine
     ports:
       - 80:80
     volumes:
