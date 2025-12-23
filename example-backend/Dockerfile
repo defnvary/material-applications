@@ -8,6 +8,12 @@ COPY . .
 
 RUN apk add build-base
 
+RUN adduser -D backend-user
+
+RUN chown backend-user -R .
+
+USER backend-user
+
 ENV REQUEST_ORIGIN=http://localhost/api
 
 RUN go build
